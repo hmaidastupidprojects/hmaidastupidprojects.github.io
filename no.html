@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Course</title>
+</head>
+<body>
+  
+  <main>
+      <center><p>text</p></center>
+      <select id="lang">
+        <option>Select your Languge</option>
+        <option value = "english">English</option>
+        <option value = "spanish">Español</option>
+       <option value="arabic">العربية</option>
+       <option value="french">Frances</option>
+      </select>
+    <select id="select">
+    
+        <option id="encode"  value="encode">encode</option>
+        <option id="decode"  value="decode">decode</option>
+      </select>
+    <center>  <p id="enter">enter your text here</p></center>
+      <textarea id="text"></textarea>
+      <center><p id="result">results</p></center>
+      <div id="results"></div>
+      <hr width="100%">
+     <center> <p size="2" id="name">Mohamed Nassereddine Hamouda</p></center>
+    </main><br>
+ 
+
+
+</body>
+
+
+<script>
+  let select = document.getElementById("select");
+let text = document.getElementById("text");
+let result = document.getElementById("results");
+let lang =  document.getElementById("lang");
+text.addEventListener("input", () => {
+  if (select.value == "decode") {
+    result.innerText = atob(text.value);
+  } else {
+    result.innerText = btoa(text.value);
+  }
+});
+  let langSelect = document.getElementById("lang");
+if (localStorage.getItem("lang") == "arabic") {
+  langSelect.classList.add("lang-right");
+} else {
+  langSelect.classList.add("lang-left");
+}
+
+  if (!localStorage.getItem("lang")) {
+  localStorage.setItem("lang", "spanish");
+}
+function updateLangUI(language) {
+  if (language === "spanish") {
+    document.getElementById("encode").innerHTML = "CODIFICAR";
+    document.getElementById("decode").innerHTML = "DESCODIFICAR";
+    document.getElementById("enter").innerHTML = "INGRESA TU TEXTO AQUÍ";
+    document.getElementById("result").innerHTML = "RESULTADOS";
+    document.getElementById("name").innerHTML = "MOHAMED NASSEREDDINE HAMOUDA";
+    document.querySelector("#lang option:first-child").innerText = "SELECCIONA TU IDIOMA";
+    document.documentElement.setAttribute("dir", "ltr");
+  } else if (language === "french") {
+    document.getElementById("encode").innerHTML = "CODER";
+    document.getElementById("decode").innerHTML = "DÉCODER";
+    document.getElementById("enter").innerHTML = "ENTREZ VOTRE TEXTE ICI";
+    document.getElementById("result").innerHTML = "RÉSULTATS";
+    document.getElementById("name").innerHTML = "MOHAMED NASSEREDDINE HAMOUDA";
+    document.querySelector("#lang option:first-child").innerText = "CHOISISSEZ VOTRE LANGUE";
+    document.documentElement.setAttribute("dir", "ltr");
+  } else if (language === "arabic") {
+    document.getElementById("encode").innerHTML = "تَشْفِير";
+    document.getElementById("decode").innerHTML = "فَكُّ التَّشْفِير";
+    document.getElementById("enter").innerHTML = "أَدْخِل النَّصّ هُنَا";
+    document.getElementById("result").innerHTML = "النَّتَائِج";
+    document.getElementById("name").innerHTML = "مُحَمَّد نَاصِر الدِّين حَمُّودَة";
+    document.querySelector("#lang option:first-child").innerText = "اخْتَرْ لُغَتَكَ";
+    document.documentElement.setAttribute("dir", "rtl");
+  } else {
+    document.getElementById("encode").innerHTML = "ENCODE";
+    document.getElementById("decode").innerHTML = "DECODE";
+    document.getElementById("enter").innerHTML = "ENTER YOUR TEXT HERE";
+    document.getElementById("result").innerHTML = "RESULTS";
+    document.getElementById("name").innerHTML = "MOHAMED NASSEREDDINE HAMOUDA";
+    document.querySelector("#lang option:first-child").innerText = "SELECT YOUR LANGUAGE";
+    document.documentElement.setAttribute("dir", "ltr");
+  }
+}
+
+let currentLang = localStorage.getItem("lang") || "spanish";
+lang.value = currentLang;
+updateLangUI(currentLang);
+
+lang.addEventListener("change", () => {
+  let selected = lang.value;
+  localStorage.setItem("lang", selected);
+  updateLangUI(selected);
+});
+
+</script>
+
+</html>
